@@ -1,0 +1,93 @@
+{% extends "sdvapp/base.html" %} {% load staticfiles %} {% block head %}
+<script src="{% static 'sdvapp/js/home.js' %}"></script>
+<script src="{% static 'sdvapp/js/difflib/difflib.js' %}"></script>
+<script src="{% static 'sdvapp/js/difflib/diffview.js' %}"></script>
+{% endblock %} {% block content %} {% if documents %}
+<h2>Documents:</h2>
+<table id="doctable" class="tablesorter">
+    <thead>
+        <tr>
+            <th class="id">Id</th>
+            <th>Name</th>
+            <th>Version</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>Size</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for doc in documents %}
+        <tr id="docrow_{{ doc.id }}">
+            <td class="id">{{ doc.id }}</td>
+            <td class="name">{{ doc.name }}</td>
+            <td class="version">{{ doc.current_version.version }}</td>
+            <td>{{ doc.current_version.user.email }}</td>
+            <td>{{ doc.status }}</td>
+            <td class="size">{{ doc.current_version.size }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No documents are available.</p>
+{% endif %}
+<p class="pbtn" id="newfilebtn">Upload new file</p>
+
+<div class="backgrounddiv" id="newfilebackgrounddiv"></div>
+<div class="filemenu" id="filemenudiv">
+    <ul class="filemenu">
+        <li id="menu_get_latest">Get Latest Version</li>
+        <li id="menu_upload_new_version">Upload new Version</li>
+        <li id="menu_sign_latest">Sign Latest Version</li>
+        <li id="menu_compare">Compare Document Versions</li>
+        <li id="menu_delete">Delete Document</li>
+        <li id="menu_more">Document Details</li>
+        <li id="menu_history">Collaboration History</li>
+    </ul>
+</div>
+
+<div class="backgrounddiv" id="ddetailsbackgrounddiv">
+    <div class="centerclass" id="ddetailscenterdiv">
+        <span id="ddetailsspan"></span>
+        <span id="dversiondetailsspan"></span>
+        <p class="pbtn" id="ddownloadbtn">Get This Version</p>
+        <p class="pbtn" id="dverifysignaturesbtn">Signatures Details</p>
+        <p class="pbtn" id="ddetailsdismissbtn">Close</p>
+    </div>
+</div>
+
+<div class="backgrounddiv" id="sdetailsbackgrounddiv">
+    <div class="centerclass" id="sdetailsdiv">
+        <h3 id="sdetailsh3"></h3>
+        <table id="sdetailstable"></table>
+        <p class="alert" id="sdetailsalert"></p>
+        <p class="pbtn" id="sdetailsdismissbtn">OK</p>
+        <p class="pbtn" id="sdetailsverifybtn">Verify All Signatures</p>
+    </div>
+</div>
+
+<div class="backgrounddiv" id="dcomparebackgrounddiv">
+    <div class="centerclass" id="dcomparediv">
+        <h3>Compare documents</h3>
+        <div id="dcomparetable"></div>
+        <p class="alert" id="dcomparealert"></p>
+        <p class="pbtn" id="dcomparecomparebtn">Comapare selected</p>
+        <p class="pbtn" id="dcomparedismissbtn">Close</p>
+    </div>
+</div>
+
+<div class="backgrounddiv" id="ddiffbackgrounddiv">
+    <div class="centerclass" id="outerdiffdiv">
+        <div id="ddiffviewdiv"></div>
+        <p class="pbtn" id="ddiffdismissbtn">Close</p>
+    </div>
+</div>
+
+<div class="backgrounddiv" id="dhistorybackgrounddiv">
+    <div class="centerclass" id="dhistoryviewdiv">
+        <div id="dhistorytablediv"></div>
+        <p class="pbtn" id="dhistorydismissbtn">Close</p>
+    </div>
+</div>
+
+{% endblock %}

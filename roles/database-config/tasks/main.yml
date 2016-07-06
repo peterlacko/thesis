@@ -1,0 +1,28 @@
+---
+- name: Ensure that /var/lib/pgsql/9.5/data/ is missing
+  file: path=/var/lib/pgsql/9.5/data state=absent
+  become: true
+- name: Initialize postgreSQL database
+  command: /usr/pgsql-9.5/bin/postgresql95-setup initdb
+  become: true
+  become_method: sudo
+- name: enable postgres service
+  service: name=postgresql-9.5 enabled=yes state=restarted
+  become: true
+  become_method: sudo
+- name: Create default database user for communication with application
+  shell: "sudo su - postgres -c 'createuser sdv -lsd'"
+- name: Create default database for application
+  command: "sudo su - postgres -c 'createdb -O sdv sdv'"
+- name: Modify pg_hba.conf
+  template: src=pg_hba.conf dest=/var/lib/pgsql/9.5/data/pg_hba.conf
+  become: true
+  become_method: sudo
+- name: Postgres service reload
+  service: name=postgresql-9.5 state=reloaded
+  become: true
+  become_method: sudo
+- name: Make initial database migrations
+  command: python3 /vagrant/sdv/manage.py makemigrations sdvapp
+- name: Run migrations
+  command: python3 /vagrant/sdv/manage.py migrate

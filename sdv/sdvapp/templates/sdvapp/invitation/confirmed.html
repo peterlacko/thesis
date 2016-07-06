@@ -1,0 +1,17 @@
+{% extends "sdvapp/base.html" %}
+{% load staticfiles %}
+{% block head %}
+<script>
+$(document).ready(function() {
+    baseScript();
+});
+</script>
+{% endblock %}
+{% block content %}
+<p>Your invitation has ben succesfully created.</p>
+<div>
+    Use this link and secret code to access registration form:
+    <p>URL: <a href="{{ url }}">{{ url }}</a></p>
+    <p>Code: {{ secret_code }}</p>
+</div>
+{% endblock %}

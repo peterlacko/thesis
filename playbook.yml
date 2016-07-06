@@ -1,0 +1,46 @@
+---
+- name: Install neccessary software on the system
+  hosts:
+    - localhost
+  tasks:
+    - name: Update all packages
+      action: "dnf name=* state=latest"
+      become: true
+      become_method: sudo
+
+    - name: Install repository for postgreSQL 9.5
+      dnf: name=http://yum.postgresql.org/9.5/fedora/fedora-23-x86_64/pgdg-fedora95-9.5-3.noarch.rpm state=present
+      become: true
+
+    - name: Install required packages
+      become: true
+      dnf: name={{ item }} state=latest
+      with_items:
+        - postgresql95-server
+        - postgresql95
+        - python3-mod_wsgi
+        - python3-psycopg2
+        - python3-pip
+        - python3-pyOpenSSL
+        - libselinux-python
+
+    - name: Update pip3
+      command: python3 -m pip install --upgrade pip
+      become: true
+
+    - name: Install django and its modules
+      command: python3 -m pip install {{ item }}
+      with_items:
+        - django
+        - django-formtools
+        - django-mathfilters
+        - django-phonenumber-field
+        - django-two-factor-auth
+        - django-extensions
+      become: true
+- name: Configure system
+  hosts: localhost
+  roles:
+    - database-config
+    - cert-generate
+    - app-config

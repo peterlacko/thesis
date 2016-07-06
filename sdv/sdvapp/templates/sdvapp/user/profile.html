@@ -1,0 +1,42 @@
+{% extends "sdvapp/base.html" %}
+{% load staticfiles %}
+{% block head %}
+<script>
+$(document).ready(function() {
+    // load common functionality
+    baseScript();
+});
+</script>
+{% endblock %}
+{% block content %}
+<h2>Account Management</h2>
+<h3>Default Permissions</h3>
+<table class="tablesorter">
+<tr>
+    <th>Organization</th>
+    <th>Admnistrator</th>
+    <th>Invite</th>
+    <th>View</th>
+    <th>Comment</th>
+    <th>Sign</th>
+    <th>Modify</th>
+    <th>Remove</th>
+</tr>
+{% for role in roles %}
+<tr>
+    <td>{{ role.organization }}</td>
+    <td>{{ role.superuser }}</td>
+    {% if role.can_invite %}
+    <td><a href="{% url 'sdvapp:invitation' %}">Invite User</a></td>
+    {% else %}
+    <td>False</td>
+    {% endif %}
+    <td>{{ role.can_view }}</td>
+    <td>{{ role.can_comment }}</td>
+    <td>{{ role.can_sign }}</td>
+    <td>{{ role.can_modify }}</td>
+    <td>{{ role.can_remove }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

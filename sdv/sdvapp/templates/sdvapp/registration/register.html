@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="{% static 'sdvapp/js/pkijs/common.js' %}"></script>
+    <script src="{% static 'sdvapp/js/pkijs/asn1.js' %}"></script>
+    <script src="{% static 'sdvapp/js/pkijs/x509_schema.js' %}"></script>
+    <script src="{% static 'sdvapp/js/pkijs/x509_simpl.js' %}"></script>
+    <script src="{% static 'sdvapp/js/pkijs/cms_schema.js' %}"></script>
+    <script src="{% static 'sdvapp/js/pkijs/cms_simpl.js' %}"></script>
+    <script src="{% static 'sdvapp/js/pkijs/pkcs12_schema.js' %}"></script>
+    <script src="{% static 'sdvapp/js/pkijs/pkcs12_simpl.js' %}"></script>
+    <script src="{% static 'sdvapp/js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'sdvapp/js/crypto.js' %}"></script>
+    <script>
+        function processCrypto(myForm) {
+            sequence = create_PKCS10(
+                $("#id_username").val(),
+                $("#id_email").val(),
+                $("#id_organization").val());
+            sequence.then(function() {
+                sequence.keysPromise.then(function() {
+                    console.log('CSR ready, keys exported');
+                    // Encrypt private key now using PKCS#12
+                    sequence2 = create_PKCS12(
+                        sequence.privateKey, $("#id_key_pwd").val());
+                    sequence2.then(function(privateKey_base64) {
+                        $("#id_priv_key").val(privateKey_base64);
+                        $("#id_pub_key").val(sequence.publicKey);
+                        $("#id_csr").val(sequence.finalCSR);
+                        myForm.submit();
+                    });
+                })
+            });
+            $("#id_submit").prop("disabled", true);
+            return false;
+        };
+    </script>
+</head>
+<body>
+    <h2>Register new user</h2>
+    <form action="/register/submit/" method="post" id="register" onsubmit="return processCrypto(this)">
+        <table>
+            {% csrf_token %}
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit" id="id_submit" />
+    </form>
+</body>

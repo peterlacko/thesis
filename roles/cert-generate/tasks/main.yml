@@ -1,0 +1,6 @@
+---
+- name: Create directory with keys
+  file: path=/vagrant/sdv/keys state=directory
+- name: Generate new self-signed certificate for signing user certificates
+  command: 'openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout certificate_signing_key.key -subj "/C=CZ/L=Brno/O=SDV/CN=sdv.com" -out certificate_signing_cert.crt
+            chdir=/vagrant/sdv/keys'

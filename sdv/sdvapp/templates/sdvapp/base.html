@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>SDV Document Management System</title>
+        <link rel="stylesheet" href="{% static 'sdvapp/css/base.css' %}">
+        <script src="{% static 'sdvapp/js/pkijs/common.js' %}"></script>
+        <script src="{% static 'sdvapp/js/pkijs/asn1.js' %}"></script>
+        <script src="{% static 'sdvapp/js/pkijs/x509_schema.js' %}"></script>
+        <script src="{% static 'sdvapp/js/pkijs/x509_simpl.js' %}"></script>
+        <script src="{% static 'sdvapp/js/pkijs/cms_schema.js' %}"></script>
+        <script src="{% static 'sdvapp/js/pkijs/cms_simpl.js' %}"></script>
+        <script src="{% static 'sdvapp/js/pkijs/pkcs12_schema.js' %}"></script>
+        <script src="{% static 'sdvapp/js/pkijs/pkcs12_simpl.js' %}"></script>
+        <script src="{% static 'sdvapp/js/jquery/jquery.js' %}"></script>
+        <script src="{% static 'sdvapp/js/jquery/jquery.tablesorter.js' %}"></script>
+        <script src="{% static 'sdvapp/js/crypto.js' %}"></script>
+        <script src="{% static 'sdvapp/js/base.js' %}"></script>
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <ul class="navbar">
+            <li><a href="{% url 'sdvapp:home' %}">Home<br/>({{ request.user }})</a>
+            <li><a href="{% url 'sdvapp:profile' %}">Profile</a>
+            <li><a href="{% url 'sdvapp:logout' %}">Logout</a>
+            <li><p class="pbtn" id="keypassbtn">Unlock Documents</p>
+        </ul>
+        <div class="backgrounddiv" id="keypassbackgrounddiv">
+          <form class="form centerclass" id="keypassform">
+            <h3>Enter password for document decryption</h3>
+            <input type="password" id="keypassinput" placeholder="type password here.."/>
+            <p class="alert" id="keypass_request_alert"></p>
+            <input class="popup" type="button" id="keypass_confirm" value="Confirm"/>
+            <input class="popup" type="button" id="keypass_cancel" value="Cancel"/>
+          </form>
+        </div>
+        {% block content %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<table class="detailstable" id="versiondetailstable">
+    <tr>
+        <td class="label">Validity</td><td class="value">{{ document.valid }}</td>
+    </tr>
+    <tr>
+        <td class="label">Created on</td><td class="value">{{ document.created }}</td>
+    </tr>
+    <tr>
+        <td class="label">Uploaded by</td><td class="value">{{ document.user.email }}</td>
+    </tr>
+    <tr>
+        <td class="label">Signed by</td>
+        <td class="value">
+            <ul>
+                {% for signature in document.signature_set.all %}
+                <li>{{ signature.user.email }}</li>
+                {% empty %}
+                <p>No signators!</p>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="label">Size</td><td class="value">{{ document.size }} bytes</td>
+    </tr>
+</table>

@@ -1,0 +1,3 @@
+---
+- name: Template application's settings file
+  template: src=settings.py dest=/vagrant/sdv/sdvproject/settings.py

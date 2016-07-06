@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head/>
+    <body>
+        <h2>Access registration</h2>
+        <p>Enter secret code you recieved by SMS</p>
+        <p>In case you didn't recieve the code, click on
+            'Request new code' button</p>
+        <form action="{{ access_url }}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <input type="submit" value="OK">
+        </form>
+        {% if wrong_code %}
+        <p>The code you entered is not correct!</p>
+        <p>Please enter correct one or request new.</p>
+        {% endif %}
+    </body>
+</html>

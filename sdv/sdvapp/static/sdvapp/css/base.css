@@ -1,0 +1,318 @@
+/*
+ * Author: Peter Lacko
+ * Year: 2016
+ */
+
+h1 {
+  font-family: Helvetica, Geneva, Arial,
+        SunSans-Regular, sans-serif }
+h2 {
+  text-shadow:1px 0px 3px gray;
+}
+h3 {
+  text-shadow:1px 0px 3px gray;
+}
+body {
+  padding-left: 12em;
+  font-family: Georgia, "Times New Roman", Times, serif
+}
+ul.navbar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 2em;
+  left: 1em;
+/*  width: 9em; */
+}
+ul.navbar li {
+/*    margin: 0.5em 0; */
+    padding: 0.4em;
+/*    border-right: 10px solid black;*/1
+    font-Weight:bold;
+    text-align: center;
+}
+ul.navbar li a{
+	display:block;
+	width: 130px;
+	background-color: #eeeeee;
+	padding: 10px 20px;
+	text-decoration: none;
+	color:black;
+	font-Weight: bold;
+	font-family: monospace;
+	border-radius:4px;
+}
+ul.navbar li p{
+	width: 130px;
+	padding-left: 10px;
+}
+ul.navbar li a.active {
+	background-color: #4CAF50;
+}
+ul.navbar li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+
+}
+address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted
+}
+p.alert {
+    color: red;
+    font-Weight:bold;
+    display: none;
+}
+table.tablesorter {
+    width:80%;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+table.tablesorter tr:hover{
+  background-color:#f5f5f5;
+  cursor:pointer;
+}
+table.tablesorter tr.selected {
+    background-color: rgba(240, 240, 220, 1);
+}
+table.tablesorter th{
+  text-align:left;
+  background-color:lightgrey;
+}
+table.tablesorter thead tr .header {
+    background-image: url('../images/tablesorter/bg.gif');
+    padding-right: 10px;
+	background-repeat: no-repeat;
+	background-position: center right;
+    font-weight: bold;
+	cursor: pointer;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url('../images/tablesorter/asc.gif');
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url('../images/tablesorter/desc.gif');
+}
+table.detailstable {
+    align-self: center;
+}
+table.detailstable td{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+table.detailstable td.label{
+    text-align: right;
+    padding-right: 10px
+}
+table.detailstable td.value{
+    text-align: left;
+    padding-left: 10px
+}
+td.id {
+    display: none;
+}
+th.id {
+    display: none;
+}
+table.history th {
+    border-bottom: 1px solid #ddd;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: lightgray;
+    padding-left: 1em;
+	padding-right: 1em;
+}
+table.history td {
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+    padding-left: 1em;
+	padding-right: 1em;
+}
+table.history tr.insufficient {
+	background-color: #FAAFBA;
+}
+table.history tr.almost {
+	background-color: #eeeeee;
+}
+table.history tr.approved {
+	background-color: #ccFFcc;
+}
+table.history li.signed {
+	color: green;
+}
+table.history li.unsigned {
+	color: red;
+}
+table.history ul.signators {
+	list-style-type: none;
+	text-indent: -2em;
+	padding-left: 2em;
+}
+
+.pbtn {
+  padding:3px;
+  cursor:pointer;
+  color:white;
+  background-color:#222222;
+  border-radius:4px;
+  text-align: center;
+}
+#keypassbtn {
+  padding:5px 5px 5px 5px;
+  font-Weight:bold;
+  width:inherit
+}
+#newfilebtn {
+  padding:4px 15px 4px 5px;
+  width:120px;
+}
+#ddetailsdismiss {
+    padding:2px 15px 2px 5px;
+    width:80px;
+    text-align: center;
+}
+b{
+font-size:18px;
+text-shadow:1px 0px 3px gray;
+}
+#popup{
+  padding-top:80px;
+}
+
+#keypassinput {
+  width:100%;
+  margin-top:5px;
+  border:1px solid #999;
+  border-radius:3px;
+  padding:5px;
+}
+input.popup {
+  background-color:#222222;
+  border:1px solid white;
+  border-radius: 4px;
+  cursor:pointer;
+  font-family: serif;
+  font-Weight:bold;
+  font-size:18px;
+  color:white;
+  width:49%;
+}
+#filemenudiv{
+    opacity: 1;
+    position: absolute;
+    background-color: #fff;
+    display: none;
+    border: darkgray;
+    box-shadow:0 0 10px;
+}
+ul.filemenu {
+  list-style-type: none;
+  padding-left: 10px;
+  padding-right: 5px;
+}
+ul.filemenu li {
+  cursor: pointer;
+  margin-top: 8px;
+  display: block;
+}
+
+ul.filemenu li:hover {
+	background-color: lightgray;
+	display: block;
+}
+.backgrounddiv {
+  opacity:1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background: rgba(100, 100, 100, 0.5);
+  display: none;
+}
+.centerclass {
+  border-radius:2px;
+  padding:10px 20px;
+  box-shadow:0 0 15px;
+  font-size:14px;
+  float:left;
+  max-width:80%;
+  max-height:80%;
+  margin:0px;
+  background-color:white;
+  font-family: serif;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow:auto;
+}
+
+#ddetailsspan, #dversiondetailsspan {
+    text-align: center;
+}
+#d1comparespan, #d2comparespan {
+    float:left;
+    display:inline;
+    width: 49%;
+
+}
+#ddiffviewdiv {
+	overflow:auto;
+
+}
+table.diff {
+	border-collapse:collapse;
+	border:1px solid darkgray;
+}
+table.diff tbody {
+	font-family:Courier, monospace;
+}
+table.diff tbody th {
+	font-family:verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;
+	background:#EED;
+	font-size:11px;
+	font-weight:normal;
+	border:1px solid #BBC;
+	color:#886;
+	padding:.3em .5em .1em 2em;
+	text-align:right;
+	vertical-align:top
+}
+table.diff thead {
+	border-bottom:1px solid #BBC;
+	background:#EFEFEF;
+	font-family:Verdana
+}
+table.diff thead th.texttitle {
+	text-align:left
+}
+table.diff tbody td {
+	padding:0px .4em;
+	padding-top:.4em;
+	vertical-align:top;
+}
+table.diff .empty {
+	background-color:#DDD;
+}
+table.diff .replace {
+	background-color:#FFA
+}
+table.diff .delete {
+	background-color:#EBB;
+}
+table.diff .skip {
+	background-color:#EFEFEF;
+	border:1px solid #AAA;
+	border-right:1px solid #BBC;
+}
+table.diff .insert {
+	background-color:#9E9
+}
+table.diff th.author {
+	text-align:right;
+	border-top:1px solid #BBC;
+	background:#EFEFEF
+}

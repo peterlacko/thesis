@@ -1,0 +1,10 @@
+<form class="fileform centerclass" id="newfileform" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ form.organizations.label_tag }} {{ form.organizations }}</p>
+    <table id="newfile_signators_table"></table>
+    <p>{{ form.due_date.label_tag }} {{ form.due_date }}</p>
+    <p>{{ form.filefield.label_tag }} {{ form.filefield }}</p>
+    <p class="alert" id="file_upload_alert"/>
+    <input class="popup" type="button" id="newfile_confirm" value="Upload"/>
+    <input class="popup" type="button" id="newfile_cancel" value="Cancel"/>
+</form>

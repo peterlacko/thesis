@@ -1,0 +1,48 @@
+{% load app_filters %}
+{% load mathfilters %}
+<table class="history">
+    <tr>
+        <th>Summary</th><th>Mandatory Signators</th><th>Other signators</th>
+    </tr>
+    {% for version in versions %}
+    {% with mandatory=mandatory_signators.count signed=signed_ms|get_item:version.version|length %}
+    {% if mandatory == 0 %}
+    <tr class="unspecified">
+    {% else %}
+    {% with ratio=signed|div:mandatory %}
+    {% if ratio < 0.5 %}
+    <tr class="insufficient">
+    {% elif ratio < 1 %}
+    <tr class="almost">
+    {% else %}
+    <tr class="approved">
+    {% endif %}
+    {% endwith %}
+    {% endif %}
+        <td>
+            <p>Version: {{ version.version }}</p>
+            <p>Mandatory: {{ signed }}/{{ mandatory }}</p>
+            <p>Total: {{ version.signature_set.count }}</p>
+        </td>
+        <td>
+            <ul class="signators">
+                {% for sig in signed_ms|get_item:version.version %}
+                <li class="signed">&#10004;{{ sig.email }}</li>
+                {% endfor %}
+
+                {% for unsig in unsigned_ms|get_item:version.version %}
+                <li class="unsigned">&#10008;{{ unsig.email }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul class="signators">
+                {% for sig in others|get_item:version.version %}
+                <li>&#10004;{{ sig.email }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endwith %}
+    {% endfor %}
+</table>

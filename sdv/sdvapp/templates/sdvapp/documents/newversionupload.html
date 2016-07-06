@@ -1,0 +1,9 @@
+<form class="fileform centerclass" id="newversionform" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <p class="alert" id="file_upload_alert"/>
+    <input class="popup" type="button" id="newversion_confirm" value="Upload"/>
+    <input class="popup" type="button" id="newversion_cancel" value="Cancel"/>
+</form>

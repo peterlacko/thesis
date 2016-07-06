@@ -1,0 +1,31 @@
+<table class="detailstable" id="documentdetailstable">
+    <tr>
+        <td class="label">Name</td><td class="value">{{ document.name }}</td>
+    </tr>
+    <tr>
+        <td class="label">Organization</td><td class="value">{{ document.organization.name }}</td>
+    </tr>
+    <tr>
+        <td class="label">Description</td><td class="value">{{ document.description }}</td>
+    </tr>
+    <tr>
+        <td class="label">Status</td><td class="value">{{ document.status }}</td>
+    </tr>
+    <tr>
+        <td class="label">Requested signators</td>
+        <td class="value">
+            <ul>
+                {% for signator in document.signator_set.all %}
+                <li>{{ signator.user.email }}</li>
+                {% empty %}
+                <span>No signators specified!</span>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>
+<select id="dversionselect">
+    {% for doc in document.documentversion_set.all reversed %}
+        <option value="{{ doc.version }}">Version {{ doc.version }}</option>
+    {% endfor %}
+</select>
