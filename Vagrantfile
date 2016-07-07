@@ -25,5 +25,5 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder ".", "/vagrant", type:"nfs"
 
-  config.vm.provision "ansible_local", playbook: "playbook.yml", install: true, install_mode: :pip, version: "1.9.6" # due to https://github.com/mitchellh/vagrant/issues/6793
+  config.vm.provision "ansible_local", playbook: "ansible/playbook.yml", install: true, install_mode: :pip, version: "1.9.6" # due to https://github.com/mitchellh/vagrant/issues/6793
 end
